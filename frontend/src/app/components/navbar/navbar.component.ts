@@ -28,5 +28,8 @@ export class NavbarComponent implements OnInit {
     localStorage.clear();
     this.route.navigateByUrl("home");
   }
+  showMessage(){
+     alert("Oscar Chinchilla 2016266 "); 
+  }
 
 }

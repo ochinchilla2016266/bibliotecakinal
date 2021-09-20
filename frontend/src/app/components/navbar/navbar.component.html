@@ -21,6 +21,7 @@
             <li *ngIf="token != null" class="nav-item">
                 <a class="nav-link enter" routerLink="/bookreview">Mis Libros y Revistas</a>
             </li>
+            <a class="nav-link enter" routerLink="/about" (click)="showMessage()">Acerca de</a>
             <div *ngIf="token != null && user.role == 'ROLE_ADMIN'" class="btn-group dropstart dark-enters dropdown-web">
                 <button type="button" class="btn dropdown-toggle fs-3 text-light" data-bs-toggle="dropdown" aria-expanded="false">
                     admin
