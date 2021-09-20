@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
     this.route.navigateByUrl("home");
   }
   showMessage(){
-     alert("Oscar Chinchilla 2016266 "); 
+     alert("Oscar Chinchilla 2016266 IN6AM "); 
   }
 
 }
