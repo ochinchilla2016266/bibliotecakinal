@@ -14,7 +14,7 @@ var reviewSchema = Schema({
     available: Number,
     frequency: String,
     examples: Number,
-    count: {type: Number, default: 0}
+    count: { type: Number, default: 0 }
 });
 
 module.exports = mongoose.model('review', reviewSchema);

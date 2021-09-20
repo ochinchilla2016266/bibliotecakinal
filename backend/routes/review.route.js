@@ -11,7 +11,7 @@ api.put("/updateReview/:id", [mdAuth.ensureAuth, mdAuth.ensureAuthAdmin], review
 api.delete("/removeReview/:id", [mdAuth.ensureAuth, mdAuth.ensureAuthAdmin], reviewController.removeReview);
 api.get("/getReviews", [mdAuth.ensureAuth], reviewController.getReviews);
 api.get("/getReview/:id", [mdAuth.ensureAuth], reviewController.getReview);
-api.put("/loanReview/:id",[mdAuth.ensureAuth], reviewController.loanReview);
-api.put("/returnReview/:id",[mdAuth.ensureAuth], reviewController.returnReview);
+api.put("/loanReview/:id", [mdAuth.ensureAuth], reviewController.loanReview);
+api.put("/returnReview/:id", [mdAuth.ensureAuth], reviewController.returnReview);
 
 module.exports = api;
