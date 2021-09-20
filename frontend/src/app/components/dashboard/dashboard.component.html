@@ -1,0 +1,132 @@
+<div class="main">
+    <div class="container p-4">
+        <h1 class="text-center fw-bold">Gráficas</h1>
+        <hr><br>
+        <div class="row">
+            <form action="" class="form-group col-md-6">
+                <select [(ngModel)]="type" name="order" id="inputType" class="form-select form-control">
+                    <option selected>Usuarios que más han prestado</option>
+                    <option>Libros más prestados</option>
+                    <option>Revistas más prestadas</option>
+                </select>
+            </form>
+            <form action="" class="form-group col-md-6">
+                <a class="btn btn-success" (click)="onChange()">Generar</a>
+            </form>
+        </div>
+        <br>
+        <div *ngIf="type == 'Usuarios que más han prestado'" class="row">
+            <div class="col rounded border-info p-4 text-center form-group col-md-6">
+                <div class="overflow-auto maxheight container">
+                    <br>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td class="text-center text-primary"><strong>Carné/CUI</strong></td>
+                                <td class="text-center text-primary"><strong>Username</strong></td>
+                                <td class="text-center text-primary"><strong>Count</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let user of users | orderBy: 'count' : order">
+                            <tr>
+                                <td class="text-center table-active">{{ user.id }}</td>
+                                <td class="text-center">{{ user.username }}</td>
+                                <td class="text-center table-active">{{ user.count }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col rounded border-info p-4 text-center form-group col-md-6">
+                <p><small class="font-weight-bold">Usuarios que más han prestado libros/revistas</small></p>
+            <div class="border border-success" *ngIf="pieChartData.length != 0; else noData">
+                <div>
+                    <div class="chart">
+                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
+                    </canvas>
+                    </div>
+                </div>
+            </div>
+            <ng-template #noData>
+                <p class="text-muted">No existen datos suficientes para generar grafica de pastel</p>
+            </ng-template>
+            </div>
+        </div>
+
+        <div *ngIf="type == 'Libros más prestados'" class="row">
+            <div class="col rounded border-info p-4 text-center form-group col-md-6">
+                <div class="overflow-auto maxheight container">
+                    <br>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td class="text-center text-primary"><strong>Title</strong></td>
+                                <td class="text-center text-primary"><strong>Author</strong></td>
+                                <td class="text-center text-primary"><strong>Count</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let book of books | orderBy: 'count' : order">
+                            <tr>
+                                <td class="text-center table-active">{{ book.title }}</td>
+                                <td class="text-center">{{ book.author }}</td>
+                                <td class="text-center table-active">{{ book.count }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col rounded border-info p-4 text-center form-group col-md-6">
+                <p><small class="font-weight-bold">Libros que más han prestado</small></p>
+            <div class="border border-success" *ngIf="pieChartData.length != 0; else noData">
+                <div>
+                    <div class="chart">
+                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
+                    </canvas>
+                    </div>
+                </div>
+            </div>
+            <ng-template #noData>
+                <p class="text-muted">No existen datos suficientes para generar grafica de pastel</p>
+            </ng-template>
+            </div>
+        </div>
+
+        <div *ngIf="type == 'Revistas más prestadas'" class="row">
+            <div class="col rounded border-info p-4 text-center form-group col-md-6">
+                <div class="overflow-auto maxheight container">
+                    <br>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td class="text-center text-primary"><strong>Title</strong></td>
+                                <td class="text-center text-primary"><strong>Author</strong></td>
+                                <td class="text-center text-primary"><strong>Count</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let review of reviews | orderBy: 'count' : order">
+                            <tr>
+                                <td class="text-center table-active">{{ review.title }}</td>
+                                <td class="text-center">{{ review.author }}</td>
+                                <td class="text-center table-active">{{ review.count }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col rounded border-info p-4 text-center form-group col-md-6">
+                <p><small class="font-weight-bold">Revistas que más han prestado</small></p>
+            <div class="border border-success" *ngIf="pieChartData.length != 0; else noData">
+                <div>
+                    <div class="chart">
+                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
+                    </canvas>
+                    </div>
+                </div>
+            </div>
+            <ng-template #noData>
+                <p class="text-muted">No existen datos suficientes para generar grafica de pastel</p>
+            </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

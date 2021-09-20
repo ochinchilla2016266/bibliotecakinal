@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-black text-light p-2 pe-4 ps-4">
+    <a class="navbar-brand fs-2" routerLink="/home"><i class="bi bi-kanban-fill"></i></a>
+
+    <div class="collapse navbar-collapse mobile-view" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto ps-4">
+            <li class="nav-item">
+                <a class="nav-link enter" routerLink="/home">Inicio</a>
+            </li>
+            <li *ngIf="token == null" class="nav-item">
+                <a class="nav-link enter" routerLink="/login">Login</a>
+            </li>
+            <li *ngIf="token == null" class="nav-item">
+                <a class="nav-link enter" routerLink="/about">Acerca de</a>
+            </li>
+            <li *ngIf="token != null" class="nav-item">
+                <a class="nav-link enter" routerLink="/books">Libros</a>
+            </li>
+            <li *ngIf="token != null" class="nav-item">
+                <a class="nav-link enter" routerLink="/reviews">Revistas</a>
+            </li>
+            <li *ngIf="token != null" class="nav-item">
+                <a class="nav-link enter" routerLink="/bookreview">Mis Libros y Revistas</a>
+            </li>
+            <div *ngIf="token != null && user.role == 'ROLE_ADMIN'" class="btn-group dropstart dark-enters dropdown-web">
+                <button type="button" class="btn dropdown-toggle fs-3 text-light" data-bs-toggle="dropdown" aria-expanded="false">
+                    admin
+                </button>
+                <ul class="dropdown-menu text-dark">
+                    <li><a class="dropdown-item dark-enters" type="button" routerLink="/dashboard">Gráficas</a></li>
+                    <li><a class="dropdown-item dark-enters" type="button" routerLink="/users">Usuarios</a></li>
+                </ul>
+            </div>
+        </ul>
+        <div *ngIf="token != null" class="btn-group dropstart dark-enters dropdown-web">
+            <button type="button" class="btn dropdown-toggle fs-3 text-light" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-gear-wide-connected text-light"></i>
+            </button>
+            <ul class="dropdown-menu text-dark">
+                <li><a class="dropdown-item dark-enters" type="button" routerLink="/history">Historial</a></li>
+                <!-- <li><a class="dropdown-item dark-enters" type="button" routerLink="/account">Mi cuenta</a></li> -->
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a type="button" class="dropdown-item dark-enters" (click)="logOut()">Salir</a></li>
+            </ul>
+        </div>
+        <!-- <div *ngIf="token != null" class="dropdown dropdown-mobile dark-enters">
+            <div class="d-flex">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Configuracion
+                </button>
+            </div>
+            <ul class="dropdown-menu text-dark">
+                <li><a class="dropdown-item dark-enters" type="button" routerLink="/history">Historial</a></li>
+                <li><a class="dropdown-item dark-enters" type="button" routerLink="/account">Mi cuenta</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item dark-enters" type="button" >Salir</a></li>
+            </ul>
+        </div> -->
+    </div>
+</nav>

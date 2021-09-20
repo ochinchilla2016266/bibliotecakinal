@@ -1,0 +1,116 @@
+<div class="main p-4">
+    <h1 *ngIf="type == 'Libros'" class="text-center fw-bold">Libros</h1>
+    <h1 *ngIf="type == 'Revistas'" class="text-center fw-bold">Revistas</h1>
+    <hr><br>
+        <div class="row">
+            <form action="" class="form-group">
+                <select [(ngModel)]="type" name="order" id="inputType" class="form-select form-control">
+                    <option selected>Libros</option>
+                    <option>Revistas</option>
+                </select>
+            </form>
+        </div>
+        <br>
+        <div *ngIf="books.length == 0 && type == 'Books'">
+            <p class="text-muted">No ha prestado ningún libro aún</p>
+        </div>
+        <div *ngIf="type == 'Libros'" class="overflow-auto maxheight">
+            <div class="card books shadow-sm" *ngFor="let book of books">
+                <div class="card-body minheight">
+                    <h5 class="card-title font-weight-bolder">{{ book.title }}</h5>
+                    <p class="card-text"><strong>Autor: </strong> {{ book.author }}</p>
+                    <p class="card-text"><strong>Edición: </strong>{{ book.edition }}</p>
+                    <a class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#showBookInfo" (click)="setBookInfo(book)">Detalles</a><br>
+                    <a class="btn btn-danger" (click)="returnBook(book)">Regresar Libro</a>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="reviews.length == 0 && type == 'Reviews'">
+            <p class="text-muted">No ha prestado ninguna revista aún</p>
+        </div>
+        <div *ngIf="type == 'Revistas'" class="overflow-auto maxheight">
+            <div class="card books shadow-sm" *ngFor="let review of reviews">
+                <div class="card-body minheight">
+                    <h5 class="card-title font-weight-bolder">{{ review.title }}</h5>
+                    <p class="card-text"><strong>Autor: </strong> {{ review.author }}</p>
+                    <p class="card-text"><strong>Edición: </strong>{{ review.edition }}</p>
+                    <a class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#showReviewInfo" (click)="setReviewInfo(review)">Detalles</a><br>
+                    <a class="btn btn-danger" (click)="returnReview(review)">Regresar Revista</a>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- Modal Detalle Libro -->
+<div class="modal" id="showBookInfo" tabindex="-1" aria-pledby="showBookInfoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="showBookInfoLabel">Detalles de Libro</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" (click)="deleteBookInfo()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <p>Autor: <strong>{{ book.author || " - " }}</strong> </p>
+                <br>
+                <p>Título: <strong>{{ book.title || " - "  }}</strong> </p>
+                <br>
+                <p>Edición: <strong>{{ book.edition || " - " }} </strong></p>
+                <br>
+                <p>Palabras clave: <strong>{{ book.key_words || " - " }}</strong> </p>
+                <br>
+                <p>Descripción: <strong>{{ book.description || " - " }}</strong> </p>
+                <br>
+                <p>Temas: <strong>{{ book.topics || " - " }}</strong> </p>
+                <br>
+                <p>Copias: <strong>{{ book.copies || " - " }}</strong> </p>
+                <br>
+                <p>Disponible: <strong>{{ book.available || " - " }}</strong> </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="deleteBookInfo()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Detalle Revista -->
+<div class="modal" id="showReviewInfo" tabindex="-1" aria-pledby="showReviewInfoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="showReviewInfoLabel">Book Details</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" (click)="deleteReviewInfo()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <p>Autor: <strong>{{ review.author || " - " }}</strong> </p>
+                <br>
+                <p>Título: <strong>{{ review.title || " - "  }}</strong> </p>
+                <br>
+                <p>Edición: <strong>{{ review.edition || " - " }} </strong></p>
+                <br>
+                <p>Palabras clave: <strong>{{ review.key_words || " - " }}</strong> </p>
+                <br>
+                <p>Descripción: <strong>{{ review.description || " - " }}</strong> </p>
+                <br>
+                <p>Temas: <strong>{{ review.topics || " - " }}</strong> </p>
+                <br>
+                <p>Copias: <strong>{{ review.copies || " - " }}</strong> </p>
+                <br>
+                <p>Disponible: <strong>{{ review.available || " - " }}</strong> </p>
+                <br>
+                <p>Frequencia: <strong>{{ review.frequency || " - " }}</strong> </p>
+                <br>
+                <p>Ejemplos: <strong>{{ review.examples || " - " }}</strong> </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="deleteReviewInfo()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

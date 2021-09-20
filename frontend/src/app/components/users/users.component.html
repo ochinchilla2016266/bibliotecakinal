@@ -1,0 +1,215 @@
+<div class="main p-4">
+    <div class="container">
+        <div class="row">
+            <form action="" class="form-group col-md-6">
+                <h1 for="order">Filtrar: </h1>
+            </form>
+            <form action="" class="form-group col-md-6">
+                <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createUser">Agregar usuario</a>
+            </form>
+        <select [(ngModel)]="order" name="order" id="inputOrder" class="form-select form-control">
+            <option selected>Ascendente</option>
+            <option>Descendiente</option>
+        </select>
+        <!-- <br>
+        <form action="" class="form-inline justify-content-center">
+            <div class="form-group">
+                <input [(ngModel)]="search" type="search" name="search" class="form-control" placeholder="Search by username">
+            </div>
+        </form> -->
+        <br>
+        <div class="overflow-auto maxheight container">
+            <br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td class="text-center text-primary"><strong>Carné/CUI</strong></td>
+                        <td class="text-center text-primary"><strong>Nombre</strong></td>
+                        <td class="text-center text-primary"><strong>Apellido</strong></td>
+                        <td class="text-center text-primary"><strong>Username</strong></td>
+                        <td class="text-center text-primary"><strong>Rol</strong></td>
+                        <td class="text-center text-primary"><strong>Correo</strong></td>
+                        <td class="text-center text-primary"><strong>CRUD</strong></td>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let user of users | orderBy: 'id' : order">
+                    <tr>
+                        <td class="text-center">{{ user.id }}</td>
+                        <td class="text-center">{{ user.name }}</td>
+                        <td class="text-center">{{ user.lastname }}</td>
+                        <td class="text-center">{{ user.username }}</td>
+                        <td class="text-center">{{ user.role }}</td>
+                        <td class="text-center">{{ user.email }}</td>
+                        <td class="text-center">
+                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showUser" (click)="setUserInfo(user)">Detalles</a>
+                            <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateUser" *ngIf="user.role != 'ROLE_ADMIN'" (click)="setUserInfo(user)">Editar</a>
+                            <a class="btn btn-danger" *ngIf="user.role != 'ROLE_ADMIN'" (click)="deleteUser(user)">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</div>
+
+<!-- Modal Crear Usuario -->
+<div class="modal" id="createUser" tabindex="-1" aria-labelledby="createUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createUserLabel">Crear Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+ 
+                <form #saveUserByAdmin="ngForm" (ngSubmit)="onSubmit(saveUserByAdmin)">
+                    <div class="form-group">
+                        <label for="inputId">Carné/CUI</label>
+                        <input [(ngModel)]="user.id" name="id" type="number" class="form-control" id="inputId">
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputUsername">Username</label>
+                            <input [(ngModel)]="user.username" name="username" type="text" class="form-control" id="inputUsername">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword">Contraseña</label>
+                            <input [(ngModel)]="user.password" name="password" type="password" class="form-control" id="inputPassword">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputName">Nombre</label>
+                            <input [(ngModel)]="user.name" name="name" type="text" class="form-control" id="inputName">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputLastname">Apellido</label>
+                            <input [(ngModel)]="user.lastname" name="lastname" type="text" class="form-control" id="inputLastname">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail">Correo</label>
+                            <input [(ngModel)]="user.email" name="email" type="text" class="form-control" id="inputEmail">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPhone">Teléfono</label>
+                            <input [(ngModel)]="user.phone" name="phone" type="number" class="form-control" id="inputPhone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRole">Rol</label>
+                        <select [(ngModel)]="user.role" name="role" id="inputRole" class="form-control">
+                        <option selected disabled>Elige un tipo de usuario...</option>
+                        <option *ngFor="let roleItem of roles" [value]="roleItem">{{ roleItem }}</option>
+                      </select>
+                    </div>
+                    <div class="modal-footer row">
+                        <button type="submit" class="btn btn-success btn-block" [disabled]="!saveUserByAdmin.form.valid">Crear</button>
+                    </div>
+                </form>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Detalle Usuario -->
+<div class="modal" id="showUser" tabindex="-1" aria-pledby="showUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="showUserLabel">Detalle Usuario</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" (click)="deleteUserInfo()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <p>Carné/CUI: <strong>{{ user.id || " - " }}</strong> </p>
+                <br>
+                <p>Username: <strong>{{ user.username || " - "  }}</strong> </p>
+                <br>
+                <p>Nombre: <strong>{{ user.name || " - " }} </strong></p>
+                <br>
+                <p>Apellido: <strong>{{ user.lastname || " - " }}</strong> </p>
+                <br>
+                <p>Rol: <strong>{{ user.role || " - " }}</strong> </p>
+                <br>
+                <p>Correo: <strong>{{ user.email || " - " }}</strong> </p>
+                <br>
+                <p>Teléfono: <strong>{{ user.phone || " - " }}</strong> </p>
+                <br>
+                <p>Libros prestados: <strong>{{ user.count || " 0 " }}</strong> </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="deleteUserInfo()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Actualizar Usuario -->
+<div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="updateUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateUserLabel">Actualizar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="deleteUserInfo()"></button>
+            </div>
+            <div class="modal-body">
+                <form #UpdateUserForm="ngForm">
+                    <div class="form-group">
+                        <label for="inputUpdateId">Carné/CUI</label>
+                        <input [(ngModel)]="user.id" name="id" type="number" class="form-control" id="inputUpdateId">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputUpdateUsername">Username</label>
+                        <input [(ngModel)]="user.username" name="username" type="text" class="form-control" id="inputUpdateUsername">
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputUpdateName">Nombre</label>
+                            <input [(ngModel)]="user.name" name="name" type="text" class="form-control" id="inputUpdateName">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputUpdateLastname">Apellido</label>
+                            <input [(ngModel)]="user.lastname" name="lastname" type="text" class="form-control" id="inputUpdateLastname">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputUpdateEmail">Correo</label>
+                            <input [(ngModel)]="user.email" name="email" type="text" class="form-control" id="inputUpdateEmail">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputUpdatePhone">Teléfono</label>
+                            <input [(ngModel)]="user.phone" name="phone" type="number" class="form-control" id="inputUpdatePhone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputUpdateRole">Rol</label>
+                        <select [(ngModel)]="user.role" name="role" id="inputUpdateRole" class="form-control">
+                        <option selected disabled>Elige un tipo de usuario...</option>
+                        <option *ngFor="let roleItem of roles" [value]="roleItem">{{ roleItem }}</option>
+                      </select>
+                    </div>
+                    <div class="modal-footer row">
+                        <button type="submit" class="btn btn-success btn-block" [disabled]="!UpdateUserForm.form.valid" (click)="updateUser(UpdateUserForm)">Update</button>
+                    </div>
+                </form>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="deleteUserInfo()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
