@@ -22,7 +22,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <td class="text-center text-primary"><strong>Carné/CUI</strong></td>
+                                <td class="text-center text-primary"><strong>Carnet</strong></td>
                                 <td class="text-center text-primary"><strong>Username</strong></td>
                                 <td class="text-center text-primary"><strong>Count</strong></td>
                             </tr>
@@ -39,17 +39,18 @@
             </div>
             <div class="col rounded border-info p-4 text-center form-group col-md-6">
                 <p><small class="font-weight-bold">Usuarios que más han prestado libros/revistas</small></p>
-            <div class="border border-success" *ngIf="pieChartData.length != 0; else noData">
-                <div>
-                    <div class="chart">
-                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
-                    </canvas>
+                <div class="border border-success" *ngIf="pieChartData.length != 0; else noData">
+                    <div>
+                        <div class="chart">
+                            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                                [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
+                            </canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <ng-template #noData>
-                <p class="text-muted">No existen datos suficientes para generar grafica de pastel</p>
-            </ng-template>
+                <ng-template #noData>
+                    <p class="text-muted">No existen datos suficientes para generar grafica de pastel</p>
+                </ng-template>
             </div>
         </div>
 
@@ -77,17 +78,18 @@
             </div>
             <div class="col rounded border-info p-4 text-center form-group col-md-6">
                 <p><small class="font-weight-bold">Libros que más han prestado</small></p>
-            <div class="border border-success" *ngIf="pieChartData.length != 0; else noData">
-                <div>
-                    <div class="chart">
-                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
-                    </canvas>
+                <div class="border border-success" *ngIf="pieChartData.length != 0; else noData">
+                    <div>
+                        <div class="chart">
+                            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                                [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
+                            </canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <ng-template #noData>
-                <p class="text-muted">No existen datos suficientes para generar grafica de pastel</p>
-            </ng-template>
+                <ng-template #noData>
+                    <p class="text-muted">No existen datos suficientes para generar grafica de pastel</p>
+                </ng-template>
             </div>
         </div>
 
@@ -115,17 +117,18 @@
             </div>
             <div class="col rounded border-info p-4 text-center form-group col-md-6">
                 <p><small class="font-weight-bold">Revistas que más han prestado</small></p>
-            <div class="border border-success" *ngIf="pieChartData.length != 0; else noData">
-                <div>
-                    <div class="chart">
-                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
-                    </canvas>
+                <div class="border border-success" *ngIf="pieChartData.length != 0; else noData">
+                    <div>
+                        <div class="chart">
+                            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                                [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
+                            </canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <ng-template #noData>
-                <p class="text-muted">No existen datos suficientes para generar grafica de pastel</p>
-            </ng-template>
+                <ng-template #noData>
+                    <p class="text-muted">No existen datos suficientes para generar grafica de pastel</p>
+                </ng-template>
             </div>
         </div>
     </div>

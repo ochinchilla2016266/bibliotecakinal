@@ -25,23 +25,23 @@ export class DashboardComponent implements OnInit {
   order: string = 'desc';
   type: string = "Usuarios que más han prestado";
 
-  constructor(private restUser: RestUserService, private restBook: RestBookService, private restReview: RestReviewService) { 
-    this.user = new User("",0,"","","","","",0,"",[],[],[],[],0);
-    this.book = new Book("","","",0,[],"",[],0,0,0);
-    this.review = new Review("","","",0,[],"",[],0,0,"",0,0);
+  constructor(private restUser: RestUserService, private restBook: RestBookService, private restReview: RestReviewService) {
+    this.user = new User("", 0, "", "", "", "", "", 0, "", [], [], [], [], 0);
+    this.book = new Book("", "", "", 0, [], "", [], 0, 0, 0);
+    this.review = new Review("", "", "", 0, [], "", [], 0, 0, "", 0, 0);
   }
 
   ngOnInit(): void {
     this.restUser.getUsers().subscribe((resp: any) => {
       this.users = resp.users
-      let dataForGraphics: Array<number>= [];
-      resp.users.forEach((user:any) => {
-        if(user.count != 0){
+      let dataForGraphics: Array<number> = [];
+      resp.users.forEach((user: any) => {
+        if (user.count != 0) {
           this.pieChartLabels.push(user.username);
           this.pieChartData.push(user.count);
         }
       });
-      if(this.pieChartData.length != 0){
+      if (this.pieChartData.length != 0) {
         for (let iterator = 0; iterator < this.pieChartData.length; iterator++) {
           this.pieChartColors[0].backgroundColor.push(this.getRandomColor());
         }
@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
     },
     plugins: {
       datalabels: {
-        formatter: (value:any, ctx:any) => {
+        formatter: (value: any, ctx: any) => {
           const label = ctx.chart.data.labels[ctx.dataIndex];
           return label;
         },
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
   public pieChartLegend = true;
   public pieChartColors: any[] = [
     {
-      backgroundColor : []
+      backgroundColor: []
     },
   ];
 
@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
     return '#' + ('000000' + color).slice(-6);
   }
 
-  onChange(){
+  onChange() {
     this.pieChartOptions = {
       responsive: true,
       legend: {
@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit {
       },
       plugins: {
         datalabels: {
-          formatter: (value:any, ctx:any) => {
+          formatter: (value: any, ctx: any) => {
             const label = ctx.chart.data.labels[ctx.dataIndex];
             return label;
           },
@@ -108,54 +108,54 @@ export class DashboardComponent implements OnInit {
     this.pieChartLegend = true;
     this.pieChartColors = [
       {
-        backgroundColor : []
+        backgroundColor: []
       },
     ];
-    if(this.type == "Usuarios que más han prestado"){
+    if (this.type == "Usuarios que más han prestado") {
       this.restUser.getUsers().subscribe((resp: any) => {
         this.users = resp.users
-        let dataForGraphics: Array<number>= [];
-        resp.users.forEach((user:any) => {
-          if(user.count != 0){
+        let dataForGraphics: Array<number> = [];
+        resp.users.forEach((user: any) => {
+          if (user.count != 0) {
             this.pieChartLabels.push(user.username);
             this.pieChartData.push(user.count);
           }
         });
-        if(this.pieChartData.length != 0){
+        if (this.pieChartData.length != 0) {
           for (let iterator = 0; iterator < this.pieChartData.length; iterator++) {
             this.pieChartColors[0].backgroundColor.push(this.getRandomColor());
           }
         }
       })
-    }else if(this.type == "Libros más prestados"){
+    } else if (this.type == "Libros más prestados") {
       this.restBook.getBooks().subscribe((resp: any) => {
         this.books = resp.books;
-        let dataForGraphics: Array<number>= [];
-        resp.books.forEach((book:any) => {
-          if(book.count != 0){
+        let dataForGraphics: Array<number> = [];
+        resp.books.forEach((book: any) => {
+          if (book.count != 0) {
             this.pieChartLabels.push(book.title);
             this.pieChartData.push(book.count);
           }
         });
 
-        if(this.pieChartData.length != 0){
+        if (this.pieChartData.length != 0) {
           for (let iterator = 0; iterator < this.pieChartData.length; iterator++) {
             this.pieChartColors[0].backgroundColor.push(this.getRandomColor());
           }
         }
       })
-    }else{
+    } else {
       this.restReview.getReviews().subscribe((resp: any) => {
         this.reviews = resp.reviews;
-        let dataForGraphics: Array<number>= [];
-        resp.reviews.forEach((review:any) => {
-          if(review.count != 0){
+        let dataForGraphics: Array<number> = [];
+        resp.reviews.forEach((review: any) => {
+          if (review.count != 0) {
             this.pieChartLabels.push(review.title);
             this.pieChartData.push(review.count);
           }
         });
 
-        if(this.pieChartData.length != 0){
+        if (this.pieChartData.length != 0) {
           for (let iterator = 0; iterator < this.pieChartData.length; iterator++) {
             this.pieChartColors[0].backgroundColor.push(this.getRandomColor());
           }

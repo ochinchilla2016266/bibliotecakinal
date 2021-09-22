@@ -16,10 +16,10 @@ export class HistoryComponent implements OnInit {
   review: Review;
   reviews: Array<Review> = [];
 
-  constructor() { 
-    this.book = new Book("","","",0,[],"",[],0,0,0);
+  constructor() {
+    this.book = new Book("", "", "", 0, [], "", [], 0, 0, 0);
     this.user = JSON.parse(localStorage.getItem("user")!);
-    this.review = new Review("","","",0,[],"",[],0,0,"",0,0);
+    this.review = new Review("", "", "", 0, [], "", [], 0, 0, "", 0, 0);
   }
 
   ngOnInit(): void {
@@ -30,20 +30,20 @@ export class HistoryComponent implements OnInit {
     console.log(this.reviews);
   }
 
-  setBookInfo(book:any){
+  setBookInfo(book: any) {
     this.book = book;
   }
 
-  deleteBookInfo(){
-    this.book = new Book("","","",0,[],"",[],0,0,0);
+  deleteBookInfo() {
+    this.book = new Book("", "", "", 0, [], "", [], 0, 0, 0);
   }
 
-  setReviewInfo(review:any){
+  setReviewInfo(review: any) {
     this.review = review;
   }
 
-  deleteReviewInfo(){
-    this.review = new Review("","","",0,[],"",[],0,0,"",0,0);
+  deleteReviewInfo() {
+    this.review = new Review("", "", "", 0, [], "", [], 0, 0, "", 0, 0);
   }
 
 }

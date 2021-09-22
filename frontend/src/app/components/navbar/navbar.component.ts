@@ -19,17 +19,17 @@ export class NavbarComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem("user")!) || null;
   }
 
-  ngDoCheck(){
+  ngDoCheck() {
     this.token = this.restUser.getToken();
     this.user = JSON.parse(localStorage.getItem("user")!) || null;
   }
 
-  logOut(){
+  logOut() {
     localStorage.clear();
     this.route.navigateByUrl("home");
   }
-  showMessage(){
-     alert("Oscar Chinchilla 2016266 IN6AM "); 
+  showMessage() {
+    alert("Oscar Chinchilla 2016266 IN6AM ");
   }
 
 }

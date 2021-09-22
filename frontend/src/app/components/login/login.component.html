@@ -5,18 +5,21 @@
         <h1 class="h3 mb-3 font-weight-normal">Inicio de sesión</h1>
 
         <label for="inputUsername" class="sr-only">Username</label><br><br>
-        <input [(ngModel)]="user.username" name="username" #username="ngModel" class="form-control" id="inputUsername" type="text" placeholder="Enter username" required>
+        <input [(ngModel)]="user.username" name="username" #username="ngModel" class="form-control" id="inputUsername"
+            type="text" placeholder="Enter username" required>
         <span *ngIf="!username.valid && username.touched">
             Required
         </span>
         <br>
         <label for="inputPassword" class="sr-only">Contraseña</label><br><br>
-        <input [(ngModel)]="user.password" name="password" #password="ngModel" class="form-control" id="inputPassword" type="password" placeholder="Enter password" required>
+        <input [(ngModel)]="user.password" name="password" #password="ngModel" class="form-control" id="inputPassword"
+            type="password" placeholder="Enter password" required>
         <span *ngIf="!password.valid && password.touched">
             Required
         </span>
         <br>
-        <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!login.form.valid">Iniciar Sesión</button>
+        <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!login.form.valid">Iniciar
+            Sesión</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
     </form>
 </body>

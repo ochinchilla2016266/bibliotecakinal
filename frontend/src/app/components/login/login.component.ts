@@ -15,32 +15,32 @@ export class LoginComponent implements OnInit {
   public user: User;
   userLogged: any;
 
-  constructor(private restUser: RestUserService, private router: Router) { 
-    this.user = new User("",0,"","","","","",0,"",[],[],[],[],0);
+  constructor(private restUser: RestUserService, private router: Router) {
+    this.user = new User("", 0, "", "", "", "", "", 0, "", [], [], [], [], 0);
   }
 
   ngOnInit(): void {
   }
 
-  onSubmit(userForm: NgForm){
-    this.restUser.login(this.user).subscribe((res:any) => {
-      if(res.token){
+  onSubmit(userForm: NgForm) {
+    this.restUser.login(this.user).subscribe((res: any) => {
+      if (res.token) {
 
         delete res.user.password;
 
         this.userLogged = JSON.stringify(res.user);
 
-        localStorage.setItem("token",res.token);
+        localStorage.setItem("token", res.token);
         localStorage.setItem("user", this.userLogged);
 
         alert("Datos correctos");
         this.router.navigateByUrl('home');
-      }else{
+      } else {
         alert(res.message);
       }
     },
-    (error:any) => 
-    alert(error.error.message)
+      (error: any) =>
+        alert(error.error.message)
     )
   }
 

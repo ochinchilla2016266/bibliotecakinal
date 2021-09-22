@@ -11,32 +11,32 @@ export class AppComponent {
   user: any;
   role = null;
 
-  ngOnInit(){
+  ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("user")!) || null;
     this.token = localStorage.getItem('token');
-    if(this.user != null){
+    if (this.user != null) {
       this.role = this.user.role;
-    }else{
+    } else {
       this.role = null;
     }
   }
 
-  ngDoCheck(){
+  ngDoCheck() {
     this.user = JSON.parse(localStorage.getItem("user")!) || null;
     this.token = localStorage.getItem('token');
-    if(this.user != null){
+    if (this.user != null) {
       this.role = this.user.role;
-    }else{
+    } else {
       this.role = null;
     }
   }
 
-  ngOnChanges(){
+  ngOnChanges() {
     this.user = JSON.parse(localStorage.getItem("user")!) || null;
     this.token = localStorage.getItem('token');
-    if(this.user != null){
+    if (this.user != null) {
       this.role = this.user.role;
-    }else{
+    } else {
       this.role = null;
     }
   }

@@ -6,24 +6,24 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class OrderByPipe implements PipeTransform {
 
   transform(array: Array<any>, args: string, order: string): Array<any> {
-    if(order == 'Ascendente'){
+    if (order == 'Ascendente') {
       return array.sort((a: any, b: any) => {
         if (a[args] < b[args]) {
-            return -1;
+          return -1;
         } else if (a[args] > b[args]) {
-            return 1;
+          return 1;
         } else {
-            return 0;
+          return 0;
         }
       });
-    }else{
+    } else {
       return array.sort((a: any, b: any) => {
         if (a[args] < b[args]) {
-            return 1;
+          return 1;
         } else if (a[args] > b[args]) {
-            return -1;
+          return -1;
         } else {
-            return 0;
+          return 0;
         }
       });
     }
